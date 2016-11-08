@@ -1,42 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>React-themeit by flipace</title>
 
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>React Storybook</title>
-        <style>
-          /*
-            When resizing panels, the drag event breaks if the cursor
-            moves over the iframe. Add the 'dragging' class to the body
-            at drag start and remove it when the drag ends.
-           */
-          .dragging iframe {
-            pointer-events: none;
-          }
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>React-themeit</h1>
+        <p>An easy way to theme your components using css modules and js css objects thanks to aphrodite. Also works with asynchronously loaded styles!</p>
 
-          /* Styling the fuzzy search box placeholders */
-          .searchBox::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-            color: #ddd;
-            font-size: 16px;
-          }
+        <p class="view"><a href="https://github.com/flipace/react-themeit">View the Project on GitHub <small>flipace/react-themeit</small></a></p>
 
-          .searchBox::-moz-placeholder { /* Firefox 19+ */
-            color: #ddd;
-            font-size: 16px;
-          }
 
-          .searchBox:focus{
-            border-color: #EEE !important;
-          }
+        <ul>
+          <li><a href="https://github.com/flipace/react-themeit/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/flipace/react-themeit/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/flipace/react-themeit">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="themeit---react--css-modules-theming-made-easy" class="anchor" href="#themeit---react--css-modules-theming-made-easy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>themeit - react &amp; css modules theming made easy</h1>
 
-          .btn:hover{
-            background-color: #eee
-          }
-        </style>
-      </head>
-      <body style="margin: 0;">
-        <div id="root"></div>
-        <script src="static/manager.bundle.js"></script>
-      </body>
-    </html>
-  
+<p>themeit makes it easy to create and use different themes
+for your react components while using CSS Modules or JS style objects.</p>
+
+<p>It's built with code splitting in mind and allows you to
+load only the themes you need at a time by utilizing code splitting.</p>
+
+<p>You can also pass in a JS style object for themes which will be processed
+automatically with <a href="https://github.com/Khan/aphrodite">aphrodite</a>.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-source-shell"><pre>npm i -S react-themeit</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p><strong>Component Declaration</strong></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> { <span class="pl-smi">themeit</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-themeit<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">const</span> <span class="pl-c1">themeOptions</span> <span class="pl-k">=</span> {
+  <span class="pl-en">base</span><span class="pl-k">:</span> <span class="pl-smi">cb</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">require</span>([<span class="pl-s"><span class="pl-pds">'</span>./base.less<span class="pl-pds">'</span></span>], cb),
+  themes<span class="pl-k">:</span> {
+    <span class="pl-en">blue</span><span class="pl-k">:</span> <span class="pl-smi">cb</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">require</span>([<span class="pl-s"><span class="pl-pds">'</span>./themes/blue.less<span class="pl-pds">'</span></span>], cb),
+    <span class="pl-en">big</span><span class="pl-k">:</span> <span class="pl-smi">cb</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">require</span>([<span class="pl-s"><span class="pl-pds">'</span>./themes/big.less<span class="pl-pds">'</span></span>], cb),
+    italic<span class="pl-k">:</span> {
+      label<span class="pl-k">:</span> {
+        fontStyle<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>italic<span class="pl-pds">'</span></span>
+      }
+    }
+  }
+};
+
+<span class="pl-k">const</span> <span class="pl-c1">MyComponent</span> <span class="pl-k">=</span> <span class="pl-smi">props</span> <span class="pl-k">=&gt;</span> (
+  <span class="pl-k">&lt;</span>div className<span class="pl-k">=</span>{<span class="pl-smi">props</span>.<span class="pl-smi">styles</span>.<span class="pl-smi">container</span>}<span class="pl-k">&gt;</span>
+    <span class="pl-k">&lt;</span>label className<span class="pl-k">=</span>{<span class="pl-smi">props</span>.<span class="pl-smi">styles</span>.<span class="pl-c1">label</span>}<span class="pl-k">&gt;</span>react<span class="pl-k">-</span>themeit<span class="pl-k">&lt;</span><span class="pl-k">/</span>label<span class="pl-k">&gt;</span>
+  <span class="pl-k">&lt;</span><span class="pl-k">/</span>div<span class="pl-k">&gt;</span>
+);
+
+<span class="pl-k">export</span> <span class="pl-v">default</span> <span class="pl-smi">themeit</span>(themeOptions)(MyComponent);</pre></div>
+
+<p><strong>Component Usage</strong></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">MyComponent</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>./MyComponent<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">export</span> <span class="pl-v">default</span> () <span class="pl-k">=&gt;</span> (
+  <span class="pl-k">&lt;</span>MyComponent
+    theme<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>blue big italic<span class="pl-pds">"</span></span>
+    styles<span class="pl-k">=</span>{{ label<span class="pl-k">:</span> { textDecoration<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>underline<span class="pl-pds">'</span></span> } }}
+    addFiles<span class="pl-k">=</span>{<span class="pl-smi">cb</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">require</span>([<span class="pl-s"><span class="pl-pds">'</span>./additionalStyles.less<span class="pl-pds">'</span></span>], cb) }
+  <span class="pl-k">/</span><span class="pl-k">&gt;</span>
+);</pre></div>
+
+<h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h3>
+
+<p><code>themeit({</code></p>
+
+<ul>
+<li>
+<code>themes</code> <em>(object)</em>: an object in which the <em>keys</em> represent <em>theme names</em> and the values can either be a function which should return a localized class map like { container: 'container_38h2f02h' } or a js style object like { container: { backgroundColor: '#000' } }</li>
+<li>[<code>default</code>] <em>(string)</em>: name of a default theme</li>
+<li>[<code>base</code>] <em>(func)</em>: base styles which should always be applied</li>
+</ul>
+
+<p><code>})</code></p>
+
+<p>A component which is wrapped with <em>themeit</em> accepts these additional props:</p>
+
+<ul>
+<li>
+<code>addFiles</code> <em>(func)</em>: a function to pass additional theme classes to the component</li>
+<li>
+<code>styles</code> <em>(object)</em>: additional js css styles to be passed to the component (will be processed with <em>aphrodite</em>)</li>
+</ul>
+
+<p>The target component will receive the combined style classes in a property called <code>styles</code>.
+It will also receive a prop named <code>themeit</code> which contains all options you passed to <em>themeit</em> and a function <code>setTheme(name)</code> which you can invoke to change the current theme of the component.</p>
+
+<h3>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h3>
+
+<h4>
+<a id="does-it-work-with-hot-reloading--hmr-" class="anchor" href="#does-it-work-with-hot-reloading--hmr-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Does it work with hot reloading / HMR ?</h4>
+
+<p>Yes. Configuring async css files for HMR require a bit of more code though. To make it easier and shorter, <em>react-themeit</em> exports a <code>hot(...)</code> function which can be used.</p>
+
+<p>Check this snippet for example:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> { <span class="pl-smi">themeit</span>, <span class="pl-smi">hot</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-themeit<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">const</span> <span class="pl-c1">themeOptions</span> <span class="pl-k">=</span> {
+  <span class="pl-en">base</span><span class="pl-k">:</span> <span class="pl-smi">cb</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">require</span>([<span class="pl-s"><span class="pl-pds">'</span>./base.less<span class="pl-pds">'</span></span>], <span class="pl-smi">s</span> <span class="pl-k">=&gt;</span> {
+    <span class="pl-en">hot</span>(s, cb, <span class="pl-smi">c</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">module</span>.<span class="pl-smi">hot</span>.<span class="pl-c1">accept</span>(<span class="pl-s"><span class="pl-pds">'</span>./base.less<span class="pl-pds">'</span></span>, c))
+  }),
+  themes<span class="pl-k">:</span> {
+    <span class="pl-en">blue</span><span class="pl-k">:</span> <span class="pl-smi">cb</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">require</span>([<span class="pl-s"><span class="pl-pds">'</span>./themes/blue.less<span class="pl-pds">'</span></span>], cb)
+  }
+};</pre></div>
+
+<p>In this case, only the <code>base</code> .less will be hot reloadable.
+The <code>hot</code> function automatically checks whether module.hot is
+defined and only enables HMR if it is.</p>
+
+<h3>
+<a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Roadmap</h3>
+
+<ul>
+<li>implement automatic generation of react-storybook stories</li>
+</ul>
+
+<h3>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About</h3>
+
+<p><img src="http://ovosplay.com/img/ovosplay.png" alt=""></p>
+
+<p>Initially built for use in the <a href="http://ovosplay.com/">ovos play game designer</a>
+to allow designers and developers to easily work together.</p>
+
+<p>Contributions are very welcome!</p>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h3>
+
+<p><a href="LICENSE">MIT License</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/flipace">flipace</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
